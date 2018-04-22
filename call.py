@@ -3,17 +3,17 @@ from twilio.rest import TwilioRestClient
 
 # Twilio phone number goes here. Grab one at https://twilio.com/try-twilio
 # and use the E.164 format, for example: "+12025551234"
-TWILIO_PHONE_NUMBER = "+919908438890"
+TWILIO_PHONE_NUMBER = "+91##########"
 
 # list of one or more phone numbers to dial, in "+19732644210" format
-DIAL_NUMBERS = ["+919908438890"]#,"+917286825692"]
+DIAL_NUMBERS = ["+91##########"]#,"+91##########"]
 
 # URL location of TwiML instructions for how to handle the phone call
 TWIML_INSTRUCTIONS_URL =  "https://demo.twilio.com/docs/voice.xml"
 
 # replace the placeholder values with your Account SID and Auth Token
 # found on the Twilio Console: https://www.twilio.com/console
-client = TwilioRestClient("AC24e0b252e340834653b0f59f26b90f81", "2d0bfd3f0750f95a92e9589f5cf55bfd")
+client = TwilioRestClient("ACxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx")
 
 
 def dial_numbers(numbers_list):
