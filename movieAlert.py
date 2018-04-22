@@ -8,21 +8,19 @@ isLang=True
 lang='english'
 movieList=[]
 
-
-
-
 def checkFav(hallList):
-	fav=""
+	fav='<h1><font color="black"><big>'
 	if ("Asian GPR".lower() in hallList.lower()):
-		fav=fav+"Asian GPR Multiplex: Kukatpally , " 
+		fav=fav+"Asian GPR Multiplex: Kukatpally || " 
 	if ("Manjeera".lower()  in hallList.lower()):
-		fav=fav+" Cinepolis: Manjeera Mall, Kukatpally , "
+		fav=fav+" Cinepolis: Manjeera Mall, Kukatpally || "
 	if ("Inorbit".lower()  in hallList.lower()):
-		fav=fav+" PVR: Inorbit, Cyberabad , "
+		fav=fav+" PVR: Inorbit, Cyberabad || "
 	if ("GVK One".lower()  in hallList.lower()):
-		fav=fav+" INOX: GVK One, Banjara Hills , "
+		fav=fav+" INOX: GVK One, Banjara Hills || "
 	if ("Forum".lower()  in hallList.lower()):
 		fav=fav+" PVR Forum Sujana Mall: Kukatpally, Hyderabad  "
+	fav=fav+"</big></font></h1>"
 	return fav
 #Mail Common variables
 toAll= "sasidhardulipudi@gmail.com,sneha.jovi@gmail.com,snehaincredulous@gmail.com,sasidhardulipudi@outlook.com,sasidhardulipudi@rediffmail.com,sasidhardulipudi1@gmail.com"
@@ -81,7 +79,7 @@ if capacity > highPercent and 'Char' in status:
 
 #this code will run every minute but it should check every sec about movies so looping 60 times to run in one minute
 inc = 0
-while(inc < 60):
+while(inc < 300):
 	bmsContent = requests.get("https://in.bookmyshow.com/hyderabad/movies").content
 	movieList=[]
 	if isLang:
@@ -98,29 +96,44 @@ while(inc < 60):
 					
 					#getting 2d theater list
 					msg1=""
+					msg2=""
+					msg3=''
 					if len(twodTicketUrl) >0:
 						listOf2dTheaters= re.findall('data-id=.*\s*data-name=(.*)\s*data-sub',requests.get("https://in.bookmyshow.com"+twodTicketUrl[0]).content)
-						msg1= msg1+ '<br/> <br/>Available 2d theaters: <br/><br/>'+" \n ".join(listOf2dTheaters) +'<br/>'
+						msg2= msg2+ '<br/> <br/><h1><font color="red"><big><b> <u>Available 2d theaters:</u></b></big></font></h1> <br/><br/><h1><font color="black"><big>'+"  || ".join(listOf2dTheaters) +'</big></font></h1><br/>'
+						
 					else:
-						msg1= msg1+ '<br/>  2d theaters not available <br/><br/>'
+						msg2= msg2+ '<br/> <br/><h1><font color="red"><big><b> <u> 2d theaters not available </u></b> </big></font></h1><br/><br/>'
+					twodfav= checkFav(msg2)
+					
 					
 					#getting 3d theater list
 					if len(threedTicketUrl) >0:
 						listOf3dTheaters= re.findall('data-id=.*\s*data-name=(.*)\s*data-sub',requests.get("https://in.bookmyshow.com"+threedTicketUrl[0]).content)
-						msg1=msg1+ '<br/>  Available 3d theaters: <br/><br/>'+"  ,  ".join(listOf3dTheaters) +'<br/>'
+						msg3=msg3+ '<br/><br/> <h1><font color="red"><big><b> <u> Available 3d theaters:</u></b></big></font></h1> <br/><br/><h1><font color="black"><big>'+"  ||  ".join(listOf3dTheaters) +'</big></font></h1><br/>'
 					else: 
-						msg1= msg1+ '<br/>  3d theaters not available <br/><br/>'
-					fav=checkFav(msg1)
-					favMsg=""
-					if fav=="":
-						favMsg= "<br/> <br/>  No favorite Halls. Sorry <br/><br/>"
-					else:
-						favMsg= " <br/> <br/> Your Favourite Halls <br/><br/>" +fav 
-						
-					mainMessageHTML= '<h1><font color="red"><big>Book ' +movie.upper()+' Tickets : Now Available Hurry up fasttttttttt. <br/>if SNEHA is reading this call SASI immediately'+favMsg+msg1+'</big></font></h1>'
+						msg3= msg3+ '<br/> <br/> <h1><font color="red"><big><b> <u>3d theaters not available</u></b> </big></font></h1><br/><br/>'
+					threedfav=checkFav(msg3)
 					
+					msg1=msg2+msg3
+					twodfavMsg=""
+					threedfavMsg=""
+					if twodfav=="":
+						twodfavMsg= '<br/> <br/> <h1><font color="red"><big> <b> <u>No 2D favorite Halls Available. Sorry </u></b></big></font></h1><br/><br/>'
+					else:
+						twodfavMsg= ' <br/> <br/><h1><font color="red"><big> <b> <u>Your Favourite 2D Halls Available </u></b></big></font></h1><br/><br/>' +twodfav 
+						
+					if threedfav=="":
+						threedfavMsg= '<br/> <br/> <h1><font color="red"><big> <b> <u>No 3D favorite Halls Available. Sorry </u></b> </big></font></h1><br/><br/>'
+					else:
+						threedfavMsg= ' <br/> <br/> <h1><font color="red"><big><b> <u>Your Favourite 3D Halls Available</u></b></big></font></h1><br/><br/>' +threedfav 
+						
+					allFav= twodfavMsg+ threedfavMsg
+						
+					mainMessageHTML= '<h1><font color="red"><big>Book ' +movie.upper()+' Tickets : Now Available Hurry up fasttttttttt. <br/>if you are reading this call SASI immediately</big></font></h1>'+ allFav+ msg1;
 					subject = "######################################## NOTICE ####################################"
-					mail.SendMessage(sender, toLog, subject, mainMessageHTML, "")
+					mail.SendMessage(sender, toAll, subject, mainMessageHTML, "")
 					call.dial_numbers(call.DIAL_NUMBERS)
 					time.sleep(60)
 	inc=inc+1;
+print('\t\t\t\t\t-----  ended at '+time.strftime("%d-%m-%Y %H:%M:%S", time.localtime()))
