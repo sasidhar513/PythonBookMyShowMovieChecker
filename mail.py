@@ -121,8 +121,8 @@ def createMessageWithAttachment(
 
 
 def main():
-    to = "sasidhardulipudi@gmail.com,sneha.jovi@gmail.com,snehaincredulous@gmail.com,sasidhardulipudi@outlook.com,sasidhardulipudi@rediffmail.com,sasidhardulipudi1@gmail.com"
-    sender = "sasidhardulipudi@gmail.com"
+    to = "XXXXXXX@gmail.com,YYYYYYY@gmail.com"
+    sender = "XXXXXXXXX@gmail.com"
     subject = "subject"
     msgHtml = '<h1><font color="red"><big>Book Avengers Tickets : Now Available Hurry up fasttttttttt. <br/>if SNEHA is reading this call SASI immediaely</big></font></h1>'
     msgPlain = "Hi\nPlain Email"
