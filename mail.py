@@ -12,7 +12,7 @@ from email.mime.audio import MIMEAudio
 from email.mime.base import MIMEBase
 
 SCOPES = 'https://www.googleapis.com/auth/gmail.send'
-CLIENT_SECRET_FILE = 'client_secret_224495753265-mj0jusvk77tsjd9tkbmarj9g1vg8qkc1.apps.googleusercontent.com.json'
+CLIENT_SECRET_FILE = 'client_secretXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX.apps.googleusercontent.com.json'
 APPLICATION_NAME = 'Gmail API Python Send Email'
 
 def get_credentials():
@@ -124,7 +124,7 @@ def main():
     to = "XXXXXXX@gmail.com,YYYYYYY@gmail.com"
     sender = "XXXXXXXXX@gmail.com"
     subject = "subject"
-    msgHtml = '<h1><font color="red"><big>Book Avengers Tickets : Now Available Hurry up fasttttttttt. <br/>if SNEHA is reading this call SASI immediaely</big></font></h1>'
+    msgHtml = '<h1><font color="red"><big>Book Avengers Tickets : Now Available Hurry up fasttttttttt. <br/>if you are reading this call me immediaely</big></font></h1>'
     msgPlain = "Hi\nPlain Email"
     SendMessage(sender, to, subject, msgHtml, msgPlain)
     # Send message with attachment: 
