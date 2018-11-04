@@ -28,3 +28,47 @@ def dial_numbers(numbers_list):
 
 if __name__ == "__main__":
     dial_numbers(DIAL_NUMBERS)
+
+    
+    
+    
+    import operator
+import functools 
+import numpy as np
+import tensorflow
+
+def dotProduct(X,theta):
+	product=X*theta
+	return np.array([functools.reduce(operator.add,lis) for lis in product])
+
+def rootMeanSqareError(predictedY, actualY)
+	predictedY-actualY
+
+
+X=np.array([[[2,3,3,6],[1,2,4,5],[1,3,5,7]],[[1,7,3,2],[2,7,3,4],[1,0,4,2]]])
+output=([[13,54,46,7],[1,3,5,63]])
+
+
+
+
+
+
+inputsampleCount=1
+outputSampleCount=1
+foodsCount=3 # no of food items(features) you are giving to find out the optimal
+inNutrientCount=4
+outNutrientCount=4 #how many nutrients you gonna find out
+
+#testInputShape=inputsampleCount X foodsCount X inNutrientCount
+#testOutputShape= outputSampleCount X outNutrientCount
+theta= np.array([[i]*inNutrientCount for i in np.random.rand(foodsCount)])
+
+
+
+
+
+
+
+
+
+
